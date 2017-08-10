@@ -93,7 +93,7 @@ public class AppTest {
 			reportDroppableTest.fail("Listener responded with \"" + chromeDroppableElements.droppableViewText() + "\", expected was \"Dropped!\"");
 		}
 		else {
-			reportDroppableTest.pass("No errors found, listener responsed with \"" + chromeDroppableElements.droppableViewText() + "\"");
+			reportDroppableTest.pass("No errors found, listener responded with \"" + chromeDroppableElements.droppableViewText() + "\"");
 		}
 	}
 
@@ -112,7 +112,7 @@ public class AppTest {
 			reportResizableTest.fail("Listener responded with \"" + chromeResizableElements.serialiseSize() + "\", expected was +/- [150, 150]");
 		}
 		else {
-			reportResizableTest.pass("No errors found, listener responsed with \"" + chromeResizableElements.serialiseSize() + "\"");
+			reportResizableTest.pass("No errors found, listener responded with \"" + chromeResizableElements.serialiseSize() + "\"");
 		}
 	}
 
