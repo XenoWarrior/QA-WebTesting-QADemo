@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,6 +29,7 @@ import com.projectge.pages.NavigationBar;
 import com.projectge.pages.ResizableElements;
 import com.projectge.pages.SelectableElements;
 import com.projectge.pages.SortableElements;
+import com.projectge.utils.Screenshot;
 
 public class AppTest {
 
@@ -70,10 +73,14 @@ public class AppTest {
 		reportDraggableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		
+		AppTest.capture(reportDraggableTest, chromeWebDriver, "DraggableBeforeOpeningPage");
 		chromeNavBar.clickDraggable();
+		AppTest.capture(reportDraggableTest, chromeWebDriver, "DraggableBeforeDraggableTest");
 		
 		DraggableElements chromeDraggableElements = PageFactory.initElements(chromeWebDriver, DraggableElements.class);
 		chromeDraggableElements.doTestTask();
+		AppTest.capture(reportDraggableTest, chromeWebDriver, "DraggableAfterTest");
 
 		reportDraggableTest.pass("No errors found.");
 	}
@@ -83,10 +90,14 @@ public class AppTest {
 		reportDroppableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		
+		AppTest.capture(reportDroppableTest, chromeWebDriver, "DroppableBeforeOpeningPage");
 		chromeNavBar.clickDroppable();
+		AppTest.capture(reportDroppableTest, chromeWebDriver, "DroppableBeforeDraggableTest");
 		
 		DroppableElements chromeDroppableElements = PageFactory.initElements(chromeWebDriver, DroppableElements.class);
 		chromeDroppableElements.doTestTask();
+		AppTest.capture(reportDroppableTest, chromeWebDriver, "DroppableAfterTest");
 		
 		assertEquals("Element must say \"Dropped!\"", chromeDroppableElements.droppableViewText(), "Dropped!");
 		if(!chromeDroppableElements.droppableViewText().equals("Dropped!")) {
@@ -102,10 +113,13 @@ public class AppTest {
 		reportResizableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		AppTest.capture(reportResizableTest, chromeWebDriver, "ResizableBeforeOpeningPage");
 		chromeNavBar.clickResizable();
+		AppTest.capture(reportResizableTest, chromeWebDriver, "ResizableBeforeDraggableTest");
 		
 		ResizableElements chromeResizableElements = PageFactory.initElements(chromeWebDriver, ResizableElements.class);
 		chromeResizableElements.doTestTask();
+		AppTest.capture(reportResizableTest, chromeWebDriver, "ResizableAfterTest");
 
 		assertNotSame("Element must not remain the same size after a resize.", chromeResizableElements.serialiseSize(), "[150, 150]");
 		if(chromeResizableElements.serialiseSize().equals("[150, 150]")) {
@@ -121,11 +135,14 @@ public class AppTest {
 		reportSelectableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		AppTest.capture(reportSelectableTest, chromeWebDriver, "SelectableBeforeOpeningPage");
 		chromeNavBar.clickSelectable();
+		AppTest.capture(reportSelectableTest, chromeWebDriver, "SelectableBeforeDraggableTest");
 
 		try {
 			SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
 			chromeSelectableElements.doTestTask();
+			AppTest.capture(reportSelectableTest, chromeWebDriver, "SelectableAfterDraggableTest");
 		}
 		catch(NoSuchElementException ex) {
 			reportSortableTest.fail(ex.getMessage());
@@ -134,16 +151,19 @@ public class AppTest {
 
 		reportSelectableTest.pass("No errors found.");
 	}
-
+	
 	@Test
 	public void runSortableTest() {
 		reportSortableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		AppTest.capture(reportSortableTest, chromeWebDriver, "SortableBeforeOpeningPage");
 		chromeNavBar.clickSortable();
+		AppTest.capture(reportSortableTest, chromeWebDriver, "SortableBeforeDraggableTest");
 	
 		SortableElements chromeSortableElements = PageFactory.initElements(chromeWebDriver, SortableElements.class);
 		chromeSortableElements.doTestTask();
+		AppTest.capture(reportSortableTest, chromeWebDriver, "SortableAfterTest");
 
 		reportSortableTest.pass("No errors found.");
 	}
@@ -157,6 +177,15 @@ public class AppTest {
 	@AfterClass
 	public static void afterClass() {
 		reportTests.flush();
+	}
+
+	public static void capture(ExtentTest t, WebDriver d, String fn) {
+		try {
+			t.addScreenCaptureFromPath(Screenshot.take(d, fn));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void hackySleep(int t) {

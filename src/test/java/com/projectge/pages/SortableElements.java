@@ -55,12 +55,12 @@ public class SortableElements {
 		
 		Action testActions = builder
 			.clickAndHold(liElement1).moveByOffset(32, 0).moveByOffset(0, 34).moveByOffset(-32, 0).release()
-			.clickAndHold(liElement4).moveByOffset(32, 0).moveByOffset(0, -34).moveByOffset(-32, 0).release()
+			.clickAndHold(liElement4).moveByOffset(32, 0).moveByOffset(0, -64).moveByOffset(-32, 0).release()
 			.clickAndHold(liElement6).moveByOffset(32, 0).moveByOffset(0, 34).moveByOffset(-32, 0).release()
-			.clickAndHold(liElement2).moveByOffset(32, 0).moveByOffset(0, -34).moveByOffset(-32, 0).release()
+			.clickAndHold(liElement2).moveByOffset(32, 0).moveByOffset(0, -64).moveByOffset(-32, 0).release()
 			.clickAndHold(liElement5).moveByOffset(32, 0).moveByOffset(0, 34).moveByOffset(-32, 0).release()
-			.clickAndHold(liElement3).moveByOffset(32, 0).moveByOffset(0, 34).moveByOffset(-32, 0).release()
-			.clickAndHold(liElement7).moveByOffset(32, 0).moveByOffset(0, -34).moveByOffset(-32, 0).release()
+			.clickAndHold(liElement3).moveByOffset(32, 0).moveByOffset(0, -34).moveByOffset(-32, 0).release()
+			.clickAndHold(liElement7).moveByOffset(32, 0).moveByOffset(0, 34).moveByOffset(-32, 0).release()
 			.build();
 
 		AppTest.reportSortableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
