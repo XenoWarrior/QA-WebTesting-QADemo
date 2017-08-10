@@ -6,13 +6,9 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -20,16 +16,40 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import com.projectge.pages.*;
+import com.projectge.pages.DraggableElements;
+import com.projectge.pages.DroppableElements;
+import com.projectge.pages.NavigationBar;
+import com.projectge.pages.ResizableElements;
+import com.projectge.pages.SelectableElements;
+import com.projectge.pages.SortableElements;
 
 public class AppTest {
 
 	public static WebDriver chromeWebDriver;
 	public static WebDriver firefoxWebDriver;
 	
+    private static ExtentReports reportTests;
+	private static ExtentTest reportDraggableTest;
+	private static ExtentTest reportDroppableTest;
+	private static ExtentTest reportResizableTest;
+	private static ExtentTest reportSelectableTest;
+	private static ExtentTest reportSortableTest;
+    private static String reportFilePath = "C:\\Users\\Administrator\\Desktop\\Report.html";
+
 	@BeforeClass
 	public static void beforeClass() {
-		// TODO Initialise the report
+        reportTests = new ExtentReports();
+		
+        ExtentHtmlReporter extentHtmlReporter = new ExtentHtmlReporter(reportFilePath);
+        extentHtmlReporter.config().setReportName("DemoQA");
+        extentHtmlReporter.config().setDocumentTitle("Functionality Tests");
+        reportTests.attachReporter(extentHtmlReporter);
+
+        reportDraggableTest = reportTests.createTest("Draggable Tests");
+        reportDroppableTest = reportTests.createTest("Droppable Tests");
+        reportResizableTest = reportTests.createTest("Resizable Tests");
+        reportSelectableTest = reportTests.createTest("Selectable Tests");
+        reportSortableTest = reportTests.createTest("Sortable Tests");
 	}
 	
 	@Before
@@ -37,29 +57,25 @@ public class AppTest {
 		chromeWebDriver = new ChromeDriver();
 		chromeWebDriver.manage().window().maximize();
 		chromeWebDriver.navigate().to("http://demoqa.com");
-		
-		//firefoxWebDriver = new FirefoxDriver();
-		//firefoxWebDriver.manage().window().maximize();
-		//firefoxWebDriver.navigate().to("http://demoqa.com");
 	}
 
-	@Ignore
 	@Test
 	public void runDraggableTests() {
-		// TODO Add an ExtrentTest for this test, to the report
+		reportDraggableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickDraggable();
 		
 		DraggableElements chromeDraggableElements = PageFactory.initElements(chromeWebDriver, DraggableElements.class);
 		chromeDraggableElements.doTestTask();
+
+		reportDraggableTest.pass("No errors found.");
 	}
 
-	@Ignore
 	@Test
 	public void runDroppableTest() {
-		// TODO Add an ExtrentTest for this test, to the report
-		
+		reportDroppableTest.log(Status.INFO, "Starting test...");
+
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickDroppable();
 		
@@ -68,46 +84,50 @@ public class AppTest {
 		
 		assertEquals("Element must say \"Dropped!\"", "Dropped!", chromeDroppableElements.droppableViewText());
 		if(chromeDroppableElements.droppableViewText() != "Dropped!") {
-			// TODO Add fail log message
+			reportDroppableTest.fail("Droppable view element did not report an element being dropped into it.");
 		}
 		else {
-			// TODO Add pass log message
+			reportDroppableTest.pass("No errors found.");
 		}
 	}
 
-	@Ignore
 	@Test
 	public void runResizableTest() {
-		// TODO Add an ExtrentTest for this test, to the report
-		
+		reportResizableTest.log(Status.INFO, "Starting test...");
+
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickResizable();
 		
 		ResizableElements chromeResizableElements = PageFactory.initElements(chromeWebDriver, ResizableElements.class);
 		chromeResizableElements.doTestTask();
+
+		reportResizableTest.pass("No errors found.");
 	}
 	
-	@Ignore
 	@Test
 	public void runSelectableTest() {
-		// TODO Add an ExtrentTest for this test, to the report
+		reportSelectableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickSelectable();
 		
 		SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
 		chromeSelectableElements.doTestTask();
+
+		reportSelectableTest.pass("No errors found.");
 	}
 	
 	@Test
 	public void runSortableTest() {
-		// TODO Add an ExtrentTest for this test, to the report
+		reportSortableTest.log(Status.INFO, "Starting test...");
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickSortable();
 		
 		SortableElements chromeSortableElements = PageFactory.initElements(chromeWebDriver, SortableElements.class);
 		chromeSortableElements.doTestTask();
+
+		reportSortableTest.pass("No errors found.");
 	}
 	
 	@After
@@ -118,10 +138,10 @@ public class AppTest {
 	
 	@AfterClass
 	public static void afterClass() {
-		// TODO Flush the report
+		reportTests.flush();
 	}
 	
-	public void hackySleep(int t) {
+	public static void hackySleep(int t) {
 		try {
 			Thread.sleep(t);
 		} catch (InterruptedException e) {
