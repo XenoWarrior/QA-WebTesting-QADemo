@@ -37,6 +37,8 @@ public class SelectableElements {
 	private Actions builder;
 	
 	public SelectableElements(WebDriver d) {
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "] driver.");
+		
 		builder = new Actions(d);
 	}
 	

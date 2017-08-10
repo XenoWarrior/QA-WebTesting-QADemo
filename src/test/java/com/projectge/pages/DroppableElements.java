@@ -19,7 +19,8 @@ public class DroppableElements {
 	private Actions builder;
 	
 	public DroppableElements(WebDriver d) {
-		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "].");
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "] driver.");
+		
 		builder = new Actions(d);
 	}
 	

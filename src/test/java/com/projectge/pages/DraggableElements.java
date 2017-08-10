@@ -16,7 +16,7 @@ public class DraggableElements {
 	private Actions builder;
 	
 	public DraggableElements(WebDriver d) {
-		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "].");
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "] driver.");
 		
 		builder = new Actions(d);
 	}

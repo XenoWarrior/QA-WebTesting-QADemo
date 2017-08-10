@@ -18,6 +18,8 @@ public class ResizableElements {
 	private Actions builder;
 	
 	public ResizableElements(WebDriver d) {
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "] driver.");
+		
 		builder = new Actions(d);
 	}
 	
