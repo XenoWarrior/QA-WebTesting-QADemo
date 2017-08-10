@@ -63,7 +63,7 @@ public class SortableElements {
 			.clickAndHold(liElement7).moveByOffset(32, 0).moveByOffset(0, -34).moveByOffset(-32, 0).release()
 			.build();
 
-		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
+		AppTest.reportSortableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		for(int i = 0; i < 10; i ++) {
 			AppTest.reportSortableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Sort iteration " + String.valueOf(i+1) + " of 10...");
 			testActions.perform();
