@@ -3,6 +3,7 @@ package com.projectge.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.aventstack.extentreports.Status;
 import com.projectge.QADemoWebTesting.AppTest;
 
 public class NavigationBar {
@@ -23,27 +24,27 @@ public class NavigationBar {
 	private WebElement sortableButton;
 	
 	public void clickDraggable() {
-		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] clickDraggable(): Sending click...");
+		AppTest.reportDraggableTest.log(Status.INFO, " Clicking on button for Draggable.");
 		draggableButton.click();
 	}
 	
 	public void clickDroppable() {
-		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] clickDroppable(): Sending click...");
+		AppTest.reportDroppableTest.log(Status.INFO, " Clicking on button for Droppable.");
 		droppableButton.click();
 	}
 
 	public void clickResizable() {
-		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] clickResizable(): Sending click...");
+		AppTest.reportResizableTest.log(Status.INFO, " Clicking on button for Resizable.");
 		resizableButton.click();
 	}
 
 	public void clickSelectable() {
-		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] clickSelectable(): Sending click...");
+		AppTest.reportSelectableTest.log(Status.INFO, " Clicking on button for Selectable.");
 		selectableButton.click();
 	}
 	
 	public void clickSortable() {
-		AppTest.reportSortableTest.debug("[" + this.getClass().getName() + ".java] clickSortable(): Sending click...");
+		AppTest.reportSortableTest.log(Status.INFO, " Clicking on button for Sortable.");
 		sortableButton.click();
 	}
 	

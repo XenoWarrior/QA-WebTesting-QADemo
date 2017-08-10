@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import com.aventstack.extentreports.Status;
 import com.projectge.QADemoWebTesting.AppTest;
 
 public class SelectableElements {
@@ -52,6 +53,13 @@ public class SelectableElements {
 	}
 	
 	public void dragSelect() {
+		AppTest.reportSelectableTest.log(Status.INFO, "Dragging down on the first element to select all (or some) below.");
+		
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Configuring test...");
+
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, clickAndHold(WebElement).");
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, moveByOffset(0, 50) (Recursive x5).");
+		
 		Action testActions = builder.clickAndHold(liElement1)
 			.moveByOffset(0, 50)
 			.moveByOffset(0, 50)
@@ -60,10 +68,12 @@ public class SelectableElements {
 			.moveByOffset(0, 50)
 			.build();
 
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		testActions.perform();
 	}
 	
 	public void selectElement(int id) throws NoSuchElementException {
+		AppTest.reportSelectableTest.log(Status.INFO, "Selecting the element at position " + id + " in the list.");
 
 		WebElement element = null;
 		
@@ -92,13 +102,17 @@ public class SelectableElements {
 		default:
 			throw new NoSuchElementException("Selectable element li: " + id + " does not exist in the DOM.");
 		}
-		
+
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Configuring test...");
+
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, click(WebElement).");
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, release(WebElement).");
 		Action testActions = builder.click(element)
 			.release(element)
 			.build();
 
+		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		testActions.perform();
-		
 	}
 	
 }

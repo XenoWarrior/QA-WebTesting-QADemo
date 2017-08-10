@@ -3,6 +3,7 @@ package com.projectge.QADemoWebTesting;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -120,9 +122,15 @@ public class AppTest {
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickSelectable();
-		
-		SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
-		chromeSelectableElements.doTestTask();
+
+		try {
+			SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
+			chromeSelectableElements.doTestTask();
+		}
+		catch(NoSuchElementException ex) {
+			reportSortableTest.fail(ex.getMessage());
+			fail(ex.getMessage());
+		}
 
 		reportSelectableTest.pass("No errors found.");
 	}
@@ -133,7 +141,7 @@ public class AppTest {
 
 		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
 		chromeNavBar.clickSortable();
-		
+	
 		SortableElements chromeSortableElements = PageFactory.initElements(chromeWebDriver, SortableElements.class);
 		chromeSortableElements.doTestTask();
 
