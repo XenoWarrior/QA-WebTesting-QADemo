@@ -65,7 +65,7 @@ public class SortableElements {
 
 		AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		for(int i = 0; i < 10; i ++) {
-			AppTest.reportSelectableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Sort iteration " + String.valueOf(i+1) + " of 10...");
+			AppTest.reportSortableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Sort iteration " + String.valueOf(i+1) + " of 10...");
 			testActions.perform();
 		}
 	}
