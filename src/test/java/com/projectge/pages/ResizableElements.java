@@ -1,5 +1,6 @@
 package com.projectge.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -11,8 +12,12 @@ public class ResizableElements {
 
 	@FindBy(xpath = "//*[@id=\"resizable\"]/div[3]")
 	private WebElement element;
+
+	private Actions builder;
 	
-	private Actions builder = new Actions(AppTest.webDriver);
+	public ResizableElements(WebDriver d) {
+		builder = new Actions(d);
+	}
 	
 	public void doTestTask() {
 		Action testActions = builder.clickAndHold(element)

@@ -2,6 +2,7 @@ package com.projectge.pages;
 
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -32,7 +33,11 @@ public class SelectableElements {
 	@FindBy(xpath = "//*[@id=\"selectable\"]/li[7]")
 	private WebElement liElement7;
 
-	private Actions builder = new Actions(AppTest.webDriver);
+	private Actions builder;
+	
+	public SelectableElements(WebDriver d) {
+		builder = new Actions(d);
+	}
 	
 	public void doTestTask() {
 		selectElement(1);

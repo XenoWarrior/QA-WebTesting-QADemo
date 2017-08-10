@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -21,10 +22,10 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import com.projectge.pages.*;
 
-@FixMethodOrder
 public class AppTest {
-	
-	public static WebDriver webDriver;
+
+	public static WebDriver chromeWebDriver;
+	public static WebDriver firefoxWebDriver;
 	
 	@BeforeClass
 	public static void beforeClass() {
@@ -33,34 +34,38 @@ public class AppTest {
 	
 	@Before
 	public void beforeTest() {
-		webDriver = new ChromeDriver();
-		webDriver.manage().window().maximize();
-		webDriver.navigate().to("http://demoqa.com");
+		chromeWebDriver = new ChromeDriver();
+		chromeWebDriver.manage().window().maximize();
+		chromeWebDriver.navigate().to("http://demoqa.com");
+		
+		//firefoxWebDriver = new FirefoxDriver();
+		//firefoxWebDriver.manage().window().maximize();
+		//firefoxWebDriver.navigate().to("http://demoqa.com");
 	}
 
 	@Test
 	public void runDraggableTests() {
 		// TODO Add an ExtrentTest for this test, to the report
+
+		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		chromeNavBar.clickDraggable();
 		
-		NavigationBar navBar = PageFactory.initElements(webDriver, NavigationBar.class);
-		navBar.clickDraggable();
-		
-		DraggableElements draggableElements = PageFactory.initElements(webDriver, DraggableElements.class);
-		draggableElements.doTestTask();
+		DraggableElements chromeDraggableElements = PageFactory.initElements(chromeWebDriver, DraggableElements.class);
+		chromeDraggableElements.doTestTask();
 	}
 
 	@Test
 	public void runDroppableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
 		
-		NavigationBar navBar = PageFactory.initElements(webDriver, NavigationBar.class);
-		navBar.clickDroppable();
+		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		chromeNavBar.clickDroppable();
 		
-		DroppableElements droppableElements = PageFactory.initElements(webDriver, DroppableElements.class);
-		droppableElements.doTestTask();
+		DroppableElements chromeDroppableElements = PageFactory.initElements(chromeWebDriver, DroppableElements.class);
+		chromeDroppableElements.doTestTask();
 		
-		assertEquals("Element must say \"Dropped!\"", "Dropped!", droppableElements.droppableViewText());
-		if(droppableElements.droppableViewText() != "Dropped!") {
+		assertEquals("Element must say \"Dropped!\"", "Dropped!", chromeDroppableElements.droppableViewText());
+		if(chromeDroppableElements.droppableViewText() != "Dropped!") {
 			// TODO Add fail log message
 		}
 		else {
@@ -72,28 +77,28 @@ public class AppTest {
 	public void runResizableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
 		
-		NavigationBar navBar = PageFactory.initElements(webDriver, NavigationBar.class);
-		navBar.clickResizable();
+		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		chromeNavBar.clickResizable();
 		
-		ResizableElements resizableElements = PageFactory.initElements(webDriver, ResizableElements.class);
-		resizableElements.doTestTask();
+		ResizableElements chromeResizableElements = PageFactory.initElements(chromeWebDriver, ResizableElements.class);
+		chromeResizableElements.doTestTask();
 	}
 	
 	@Test
 	public void runSelectableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
 
-		NavigationBar navBar = PageFactory.initElements(webDriver, NavigationBar.class);
-		navBar.clickSelectable();
+		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		chromeNavBar.clickSelectable();
 		
-		SelectableElements selectableElements = PageFactory.initElements(webDriver, SelectableElements.class);
-		selectableElements.doTestTask();
+		SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
+		chromeSelectableElements.doTestTask();
 	}
 	
 	@After
 	public void afterTest() { 
-		webDriver.close();
-		webDriver.quit();
+		chromeWebDriver.close();
+		chromeWebDriver.quit();
 	}
 	
 	@AfterClass
