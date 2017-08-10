@@ -28,13 +28,14 @@ public class AppTest {
 	public static WebDriver chromeWebDriver;
 	public static WebDriver firefoxWebDriver;
 	
+	private static String reportFilePath = "C:\\Users\\Administrator\\Desktop\\Report.html";
     private static ExtentReports reportTests;
-	private static ExtentTest reportDraggableTest;
-	private static ExtentTest reportDroppableTest;
-	private static ExtentTest reportResizableTest;
-	private static ExtentTest reportSelectableTest;
-	private static ExtentTest reportSortableTest;
-    private static String reportFilePath = "C:\\Users\\Administrator\\Desktop\\Report.html";
+    
+	public static ExtentTest reportDraggableTest;
+	public static ExtentTest reportDroppableTest;
+	public static ExtentTest reportResizableTest;
+	public static ExtentTest reportSelectableTest;
+	public static ExtentTest reportSortableTest;
 
 	@BeforeClass
 	public static void beforeClass() {

@@ -16,15 +16,24 @@ public class DraggableElements {
 	private Actions builder;
 	
 	public DraggableElements(WebDriver d) {
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "].");
+		
 		builder = new Actions(d);
 	}
 	
 	public void doTestTask() {
-		Action testActions = builder.clickAndHold(element)
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Configuring test...");
+
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, clickAndHold(WebElement).");
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, moveByOffset(100, 100).");
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, release(WebElement).");
+		Action testActions = builder
+			.clickAndHold(element)
 			.moveByOffset(100, 100)
 			.release(element)
 			.build();
-
+		
+		AppTest.reportDraggableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		testActions.perform();
 	}
 	
