@@ -18,12 +18,12 @@ public class DroppableElements {
 	private Actions builder = new Actions(AppTest.webDriver);
 	
 	public void doTestTask() {
-		Action dragAndDrop = builder.clickAndHold(draggableView)
+		Action testActions = builder.clickAndHold(draggableView)
 			.moveByOffset(140, 90)
 			.release(draggableView)
 			.build();
 
-		dragAndDrop.perform();
+		testActions.perform();
 	}
 	
 	public String droppableViewText() {

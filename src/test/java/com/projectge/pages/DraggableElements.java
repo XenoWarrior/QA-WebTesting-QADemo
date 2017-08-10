@@ -15,12 +15,12 @@ public class DraggableElements {
 	private Actions builder = new Actions(AppTest.webDriver);
 	
 	public void doTestTask() {
-		Action dragAndDrop = builder.clickAndHold(element)
+		Action testActions = builder.clickAndHold(element)
 			.moveByOffset(100, 100)
 			.release(element)
 			.build();
 
-		dragAndDrop.perform();
+		testActions.perform();
 	}
 	
 }

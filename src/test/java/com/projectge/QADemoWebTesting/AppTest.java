@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.openqa.selenium.WebDriver;
@@ -19,6 +21,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import com.projectge.pages.*;
 
+@FixMethodOrder
 public class AppTest {
 	
 	public static WebDriver webDriver;
@@ -45,7 +48,7 @@ public class AppTest {
 		DraggableElements draggableElements = PageFactory.initElements(webDriver, DraggableElements.class);
 		draggableElements.doTestTask();
 	}
-	
+
 	@Test
 	public void runDroppableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -64,7 +67,7 @@ public class AppTest {
 			// TODO Add pass log message
 		}
 	}
-	
+
 	@Test
 	public void runResizableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -74,6 +77,17 @@ public class AppTest {
 		
 		ResizableElements resizableElements = PageFactory.initElements(webDriver, ResizableElements.class);
 		resizableElements.doTestTask();
+	}
+	
+	@Test
+	public void runSelectableTest() {
+		// TODO Add an ExtrentTest for this test, to the report
+
+		NavigationBar navBar = PageFactory.initElements(webDriver, NavigationBar.class);
+		navBar.clickSelectable();
+		
+		SelectableElements selectableElements = PageFactory.initElements(webDriver, SelectableElements.class);
+		selectableElements.doTestTask();
 	}
 	
 	@After
