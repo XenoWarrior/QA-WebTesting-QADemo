@@ -43,6 +43,7 @@ public class AppTest {
 		//firefoxWebDriver.navigate().to("http://demoqa.com");
 	}
 
+	@Ignore
 	@Test
 	public void runDraggableTests() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -54,6 +55,7 @@ public class AppTest {
 		chromeDraggableElements.doTestTask();
 	}
 
+	@Ignore
 	@Test
 	public void runDroppableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -73,6 +75,7 @@ public class AppTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void runResizableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -84,6 +87,7 @@ public class AppTest {
 		chromeResizableElements.doTestTask();
 	}
 	
+	@Ignore
 	@Test
 	public void runSelectableTest() {
 		// TODO Add an ExtrentTest for this test, to the report
@@ -93,6 +97,17 @@ public class AppTest {
 		
 		SelectableElements chromeSelectableElements = PageFactory.initElements(chromeWebDriver, SelectableElements.class);
 		chromeSelectableElements.doTestTask();
+	}
+	
+	@Test
+	public void runSortableTest() {
+		// TODO Add an ExtrentTest for this test, to the report
+
+		NavigationBar chromeNavBar = PageFactory.initElements(chromeWebDriver, NavigationBar.class);
+		chromeNavBar.clickSortable();
+		
+		SortableElements chromeSortableElements = PageFactory.initElements(chromeWebDriver, SortableElements.class);
+		chromeSortableElements.doTestTask();
 	}
 	
 	@After

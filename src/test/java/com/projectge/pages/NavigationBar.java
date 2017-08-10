@@ -13,9 +13,12 @@ public class NavigationBar {
 
 	@FindBy(xpath = "//li[@id=\"menu-item-143\"]/a")
 	private WebElement resizableButton;
-	//*
+	
 	@FindBy(xpath = "//li[@id=\"menu-item-142\"]/a")
 	private WebElement selectableButton;
+	
+	@FindBy(xpath = "//li[@id=\"menu-item-151\"]/a")
+	private WebElement sortableButton;
 	
 	public void clickDraggable() {
 		draggableButton.click();
@@ -28,9 +31,13 @@ public class NavigationBar {
 	public void clickResizable() {
 		resizableButton.click();
 	}
-	
+
 	public void clickSelectable() {
 		selectableButton.click();
+	}
+	
+	public void clickSortable() {
+		sortableButton.click();
 	}
 	
 }
