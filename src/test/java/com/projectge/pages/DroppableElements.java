@@ -19,15 +19,24 @@ public class DroppableElements {
 	private Actions builder;
 	
 	public DroppableElements(WebDriver d) {
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] constructor(WebDriver): Initialising with a [" + d.getClass().getName() + "].");
 		builder = new Actions(d);
 	}
 	
 	public void doTestTask() {
-		Action testActions = builder.clickAndHold(draggableView)
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Configuring test...");
+
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, clickAndHold(WebElement).");
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, moveByOffset(140, 90).");
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, release(WebElement).");
+		
+		Action testActions = builder
+			.clickAndHold(draggableView)
 			.moveByOffset(140, 90)
 			.release(draggableView)
 			.build();
 
+		AppTest.reportDroppableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		testActions.perform();
 	}
 	

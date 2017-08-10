@@ -84,11 +84,11 @@ public class AppTest {
 		chromeDroppableElements.doTestTask();
 		
 		assertEquals("Element must say \"Dropped!\"", "Dropped!", chromeDroppableElements.droppableViewText());
-		if(chromeDroppableElements.droppableViewText() != "Dropped!") {
-			reportDroppableTest.fail("Droppable view element did not report an element being dropped into it.");
+		if(!chromeDroppableElements.droppableViewText().equals("Dropped!")) {
+			reportDroppableTest.fail("Listener responded with \"" + chromeDroppableElements.droppableViewText() + "\", expected was \"Dropped!\"");
 		}
 		else {
-			reportDroppableTest.pass("No errors found.");
+			reportDroppableTest.pass("No errors found, listener responsed with \"" + chromeDroppableElements.droppableViewText() + "\"");
 		}
 	}
 
