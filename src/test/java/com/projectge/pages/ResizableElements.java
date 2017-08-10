@@ -12,6 +12,8 @@ public class ResizableElements {
 
 	@FindBy(xpath = "//*[@id=\"resizable\"]/div[3]")
 	private WebElement element;
+	@FindBy(xpath = "//*[@id=\"resizable\"]")
+	private WebElement parent;
 
 	private Actions builder;
 	
@@ -20,12 +22,23 @@ public class ResizableElements {
 	}
 	
 	public void doTestTask() {
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Configuring test...");
+
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, clickAndHold(WebElement).");
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, moveByOffset(200, 200).");
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): testActions, release(WebElement).");
 		Action testActions = builder.clickAndHold(element)
 			.moveByOffset(200, 200)
 			.release(element)
 			.build();
 
+		AppTest.reportResizableTest.debug("[" + this.getClass().getName() + ".java] doTestTask(): Performing actions...");
 		testActions.perform();
+	}
+	
+	public String serialiseSize() { 
+		
+		return "[" + String.valueOf(parent.getSize().getWidth()) + ", " + String.valueOf(parent.getSize().getWidth()) + "]"; 
 	}
 	
 }

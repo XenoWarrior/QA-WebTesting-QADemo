@@ -1,11 +1,14 @@
 package com.projectge.QADemoWebTesting;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,7 +62,7 @@ public class AppTest {
 		chromeWebDriver.manage().window().maximize();
 		chromeWebDriver.navigate().to("http://demoqa.com");
 	}
-
+	
 	@Test
 	public void runDraggableTests() {
 		reportDraggableTest.log(Status.INFO, "Starting test...");
@@ -83,7 +86,7 @@ public class AppTest {
 		DroppableElements chromeDroppableElements = PageFactory.initElements(chromeWebDriver, DroppableElements.class);
 		chromeDroppableElements.doTestTask();
 		
-		assertEquals("Element must say \"Dropped!\"", "Dropped!", chromeDroppableElements.droppableViewText());
+		assertEquals("Element must say \"Dropped!\"", chromeDroppableElements.droppableViewText(), "Dropped!");
 		if(!chromeDroppableElements.droppableViewText().equals("Dropped!")) {
 			reportDroppableTest.fail("Listener responded with \"" + chromeDroppableElements.droppableViewText() + "\", expected was \"Dropped!\"");
 		}
@@ -102,9 +105,15 @@ public class AppTest {
 		ResizableElements chromeResizableElements = PageFactory.initElements(chromeWebDriver, ResizableElements.class);
 		chromeResizableElements.doTestTask();
 
-		reportResizableTest.pass("No errors found.");
+		assertNotSame("Element must not remain the same size after a resize.", chromeResizableElements.serialiseSize(), "[150, 150]");
+		if(chromeResizableElements.serialiseSize().equals("[150, 150]")) {
+			reportResizableTest.fail("Listener responded with \"" + chromeResizableElements.serialiseSize() + "\", expected was +/- [150, 150]");
+		}
+		else {
+			reportResizableTest.pass("No errors found, listener responsed with \"" + chromeResizableElements.serialiseSize() + "\"");
+		}
 	}
-	
+
 	@Test
 	public void runSelectableTest() {
 		reportSelectableTest.log(Status.INFO, "Starting test...");
@@ -117,7 +126,7 @@ public class AppTest {
 
 		reportSelectableTest.pass("No errors found.");
 	}
-	
+
 	@Test
 	public void runSortableTest() {
 		reportSortableTest.log(Status.INFO, "Starting test...");
