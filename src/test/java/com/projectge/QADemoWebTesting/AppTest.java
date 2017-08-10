@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
@@ -36,7 +37,7 @@ public class AppTest {
 	public static WebDriver chromeWebDriver;
 	public static WebDriver firefoxWebDriver;
 	
-	private static String reportFilePath = "C:\\Users\\Administrator\\Desktop\\Report.html";
+	private static String reportFilePath = System.getProperty("user.dir") + File.separatorChar + "Report" + File.separatorChar + "Report.html";
     private static ExtentReports reportTests;
     
 	public static ExtentTest reportDraggableTest;
