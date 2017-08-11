@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.aventstack.extentreports.Status;
-import com.projectge.QADemoWebTesting.AppTest;
+import com.projectge.main.AppTest;
 
 public class NavigationBar {
 

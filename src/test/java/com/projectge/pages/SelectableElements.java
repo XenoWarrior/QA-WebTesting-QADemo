@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.aventstack.extentreports.Status;
-import com.projectge.QADemoWebTesting.AppTest;
+import com.projectge.main.AppTest;
 
 public class SelectableElements {
 

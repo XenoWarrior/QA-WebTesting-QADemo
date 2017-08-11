@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import com.projectge.QADemoWebTesting.AppTest;
+import com.projectge.main.AppTest;
 
 public class DroppableElements {
 	

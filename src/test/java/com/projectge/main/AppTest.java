@@ -1,4 +1,4 @@
-package com.projectge.QADemoWebTesting;
+package com.projectge.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
