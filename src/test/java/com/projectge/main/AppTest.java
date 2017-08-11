@@ -2,14 +2,11 @@ package com.projectge.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -135,10 +133,18 @@ public class AppTest {
 				AppTest.capture(reportDraggableTest, chromeWebDriver, "DraggableBeforeDraggableTest");
 				
 				DraggableElements chromeDraggableElements = PageFactory.initElements(chromeWebDriver, DraggableElements.class);
+				
+				String previousPoint = chromeDraggableElements.serialisePosition();
 				chromeDraggableElements.doTestTask();
 				AppTest.capture(reportDraggableTest, chromeWebDriver, "DraggableAfterTest");
-		
-				reportDraggableTest.pass("No errors found.");
+				
+				assertSame("Element must not be in the same position as it was before the test.", previousPoint, chromeDraggableElements.serialisePosition());
+				if(previousPoint == chromeDraggableElements.serialisePosition()) {
+					reportDraggableTest.fail("Element position did not change.");					
+				}
+				else {
+					reportDraggableTest.pass("No errors found, element position did change.");
+				}
 			}
 			else {
 				reportDraggableTest.warning("Test is disabled, to run it, enable it in TestData.xlsx.");
@@ -162,7 +168,7 @@ public class AppTest {
 				chromeDroppableElements.doTestTask();
 				AppTest.capture(reportDroppableTest, chromeWebDriver, "DroppableAfterTest");
 				
-				assertEquals("Element must say \"Dropped!\"", chromeDroppableElements.droppableViewText(), "Dropped!");
+				assertEquals("Element must say \"Dropped!\"", "Dropped!", chromeDroppableElements.droppableViewText());
 				if(!chromeDroppableElements.droppableViewText().equals("Dropped!")) {
 					reportDroppableTest.fail("Listener responded with \"" + chromeDroppableElements.droppableViewText() + "\", expected was \"Dropped!\"");
 				}

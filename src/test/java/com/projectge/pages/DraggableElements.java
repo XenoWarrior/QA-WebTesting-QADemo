@@ -37,4 +37,7 @@ public class DraggableElements {
 		testActions.perform();
 	}
 	
+	public String serialisePosition() {
+		return element.getLocation().toString();
+	}
 }
